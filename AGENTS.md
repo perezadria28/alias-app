@@ -42,6 +42,20 @@ not claim provider availability.
 - Proposals live in `docs/proposals/` and follow `~/.config/opencode/templates/proposal.md`.
 - README is intentionally deferred until the project scope is clearer.
 
+## Project Workflow
+
+- The repository MUST always have a `dev` branch. If `dev` does not exist, the
+  workflow is incomplete and must be fixed before non-trivial implementation.
+- Non-trivial implementation work SHOULD start from a GitHub issue with clear
+  scope and acceptance criteria.
+- Feature branches MUST branch from `dev` unless the user explicitly chooses a
+  different base.
+- Feature PRs MUST target `dev`; do not open feature PRs directly into `main`.
+- `main` is reserved for stable promotion or release PRs from `dev`.
+- Use milestones for MVP or release grouping.
+- Do not introduce formal sprints or project boards unless the active work grows
+  beyond a few parallel issues.
+
 ## Product Language
 
 - Technical artifacts are written in English.

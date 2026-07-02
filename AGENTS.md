@@ -27,6 +27,10 @@ not claim provider availability.
 - Browser extensions.
 - Real email forwarding, inbox rules, recipients, domains, or provider credentials.
 
+Any request involving providers, domains, availability checks, persistence,
+credentials, forwarding, or real email behaviour MUST trigger a scope checkpoint
+before implementation.
+
 ## Architecture Direction
 
 - `packages/core` will hold the Python alias generation logic.
@@ -34,6 +38,8 @@ not claim provider availability.
 - `packages/tui` will provide the Python TUI.
 - `packages/web` will provide the React + TypeScript local web UI.
 - Shared behaviour MUST live in the core package before being reused by backend, TUI, or web.
+- Do not create backend, TUI, or web packages until core behaviour is
+  implemented, tested, and the user approves the next interface slice.
 
 ## Documentation
 
@@ -46,13 +52,18 @@ not claim provider availability.
 
 - The repository MUST always have a `dev` branch. If `dev` does not exist, the
   workflow is incomplete and must be fixed before non-trivial implementation.
-- Non-trivial implementation work SHOULD start from a GitHub issue with clear
-  scope and acceptance criteria.
+- Every non-trivial implementation slice MUST start from a GitHub issue with
+  clear scope and acceptance criteria unless the user explicitly waives it.
+- Before editing code, verify the current branch. Feature work MUST NOT happen
+  directly on `main` or `dev`.
 - Feature branches MUST branch from `dev` unless the user explicitly chooses a
   different base.
 - Feature PRs MUST target `dev`; do not open feature PRs directly into `main`.
+- Non-trivial feature branches MUST be reviewed through a PR unless the user
+  explicitly waives PR-based review.
 - `main` is reserved for stable promotion or release PRs from `dev`.
-- Use milestones for MVP or release grouping.
+- Every issue that belongs to the MVP MUST be assigned to the relevant
+  milestone.
 - Do not introduce formal sprints or project boards unless the active work grows
   beyond a few parallel issues.
 
